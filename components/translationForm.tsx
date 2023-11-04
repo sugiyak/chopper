@@ -55,12 +55,6 @@ export default function TranslationForm() {
     }, 0);
   }
 
-  function checkLocal() {
-    const storedJSON: string = localStorage.getItem("chopper_current_file");
-    const parsedJson = JSON.parse(storedJSON);
-    console.log(parsedJson)
-  }
-
   function combineTranslations() {
     if (fileData.parsed) {
       // Combine all translations into one string, separated by a space or other delimiter
@@ -70,10 +64,8 @@ export default function TranslationForm() {
   }
 
   function handleDownload() {
-    console.log()
     const combinedText = combineTranslations();
-    if (combinedText) {
-      // Call the download function
+    if (combinedText && fileData.name) { // Ensure fileData.name is not null
       downloadTextAsFile(fileData.name, combinedText);
     }
   }
@@ -82,7 +74,7 @@ export default function TranslationForm() {
     <>
       <Button onClick={handleDownload}>Download</Button>
       {
-        fileData.parsed.map((obj, i) => {
+        fileData.parsed?.map((obj, i) => {
           return (
             <div className={`w-1/2 p-2 my-16 content-between`} key={i}>
               <p className="mb-3">{obj.original}</p>
@@ -94,7 +86,7 @@ export default function TranslationForm() {
               <Button className="mt-3" variant="outline" onClick={() => handleCopy(i, obj.original)}>Copy Source</Button>
             </div>
           )
-        })}
+        }) ?? null}
     </>
   )
 }

@@ -11,11 +11,13 @@ export default function ResumePrevious() {
 
     useEffect(() => {
         if (localStorage.getItem("chopper_current_file")) {
-            const storedJSON: string = localStorage.getItem("chopper_current_file");
-            const parsedJson = JSON.parse(storedJSON);
-            setPreviousFile(parsedJson)
-            console.log("Previous file detected")
-            console.log(parsedJson)
+            const storedJSON = localStorage.getItem("chopper_current_file");
+            if (storedJSON) { // Check if storedJSON is not null
+                const parsedJson = JSON.parse(storedJSON);
+                setPreviousFile(parsedJson);
+                console.log("Previous file detected");
+                console.log(parsedJson);
+            }
         }
     }, [])
 

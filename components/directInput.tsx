@@ -9,7 +9,7 @@ export default function DirectInput() {
     const [text, setText] = useState<string | null>(null);
     const [fileData, setFileData] = useContext(FileContext);
 
-    const handleTextarea = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setText(e.target.value)
         console.log(text)
     }
